@@ -4,6 +4,11 @@ import java.util.Properties;
 
 import javax.sql.DataSource;
 
+import java.net.URI;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -63,11 +68,12 @@ public class SpringConfiguration extends WebMvcConfigurerAdapter{
 	
 	@Bean
 	public DataSource dataSource() {
+		URI dbUri = new URI(System.getenv("DATABASE_URL"));
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		dataSource.setDriverClassName(environment.getProperty("driver"));
-		dataSource.setUrl(environment.getProperty("url"));
-		dataSource.setUsername(environment.getProperty("user"));
-		dataSource.setPassword(environment.getProperty("password"));
+		dataSource.setDriverClassName(environment.getProperty("org.postgresql.Driver"));
+		dataSource.setUrl(environment.getProperty("jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath()));
+		dataSource.setUsername(environment.getProperty(dbUri.getUserInfo().split(":")[0]));
+		dataSource.setPassword(environment.getProperty(dbUri.getUserInfo().split(":")[1];));
 		return dataSource;
 	}
 	
