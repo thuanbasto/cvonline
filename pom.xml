@@ -8,7 +8,7 @@
   <name>CV Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <properties>
-		<springframework.version>5.0.8.RELEASE</springframework.version>
+		<springframework.version>5.2.6.RELEASE</springframework.version>
 		<servlet.version>3.1.0</servlet.version>
 		<servletjsp.version>2.3.1</servletjsp.version>
 		<jstl.version>1.2</jstl.version>
@@ -23,7 +23,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
-	<!--C?u hình jitback.io-->
+	<!--C?u hÃ¬nh jitback.io-->
 	<repositories>
 		<repository>
 			<id>jitpack.io</id>
