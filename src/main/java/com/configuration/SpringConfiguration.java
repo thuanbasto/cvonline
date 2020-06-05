@@ -70,10 +70,10 @@ public class SpringConfiguration extends WebMvcConfigurerAdapter{
 	public DataSource dataSource() {
 		URI dbUri = new URI(System.getenv("DATABASE_URL"));
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		dataSource.setDriverClassName(environment.getProperty("org.postgresql.Driver"));
-		dataSource.setUrl(environment.getProperty("jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath()));
-		dataSource.setUsername(environment.getProperty(dbUri.getUserInfo().split(":")[0]));
-		dataSource.setPassword(environment.getProperty(dbUri.getUserInfo().split(":")[1];));
+		dataSource.setDriverClassName("org.postgresql.Driver");
+		dataSource.setUrl("jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath());
+		dataSource.setUsername(dbUri.getUserInfo().split(":")[0]);
+		dataSource.setPassword(dbUri.getUserInfo().split(":")[1]);
 		return dataSource;
 	}
 	
