@@ -82,7 +82,7 @@ public class SpringConfiguration extends WebMvcConfigurerAdapter{
 	}
 	
 	@Bean
-	public LocalSessionFactoryBean localSessionFactoryBean() {
+	public LocalSessionFactoryBean localSessionFactoryBean() throws ClassNotFoundException, URISyntaxException {
 		LocalSessionFactoryBean bean = new LocalSessionFactoryBean();
 		bean.setDataSource(dataSource());
 		bean.setPackagesToScan("com.entity");
