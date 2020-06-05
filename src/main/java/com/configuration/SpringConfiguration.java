@@ -67,13 +67,20 @@ public class SpringConfiguration extends WebMvcConfigurerAdapter{
 	}
 	
 	@Bean
-	public DataSource dataSource() {
+	public DataSource dataSource() throws URISyntaxException, ClassNotFoundException {
+		Class.forName("org.postgresql.Driver");
 		URI dbUri = new URI(System.getenv("DATABASE_URL"));
+		
+		String username = dbUri.getUserInfo().split(":")[0];
+        String password = dbUri.getUserInfo().split(":")[1];
+        String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
+
+		
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("org.postgresql.Driver");
-		dataSource.setUrl("jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath());
-		dataSource.setUsername(dbUri.getUserInfo().split(":")[0]);
-		dataSource.setPassword(dbUri.getUserInfo().split(":")[1]);
+		dataSource.setUrl(dbUrl);
+		dataSource.setUsername(username);
+		dataSource.setPassword(password);
 		return dataSource;
 	}
 	
