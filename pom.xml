@@ -18,12 +18,12 @@
 		<apache.tile.version>3.0.7</apache.tile.version>
 		<rest.json.version>2.9.2</rest.json.version>
 		<spring.security.version>4.2.3.RELEASE</spring.security.version>
-		<common.fileupload.version>1.3.1</common.fileupload.version>
+		<common.fileupload.version>1.3.3</common.fileupload.version>
 		
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
-	<!--C?u hình jitback.io-->
+	<!--C?u hÃ¬nh jitback.io-->
 	<repositories>
 		<repository>
 			<id>jitpack.io</id>
