@@ -1,7 +1,5 @@
 package com.configuration;
 
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.Properties;
 
 import javax.sql.DataSource;
@@ -62,27 +60,31 @@ public class SpringConfiguration extends WebMvcConfigurerAdapter{
 	public static PropertySourcesPlaceholderConfigurer placeholderConfigurer() {
 		return new PropertySourcesPlaceholderConfigurer();
 	}
-	
+	//String url ="jdbc:mysql://thuan1.mysql.database.azure.com:3306/
+	// {your_database}?useSSL=true&requireSSL=false"; myDbConn 
+	// = DriverManager.getConnection(url, "thuan@thuan1", {your_password});
 	@Bean
-	public DataSource dataSource() throws URISyntaxException, ClassNotFoundException {
-		Class.forName("org.postgresql.Driver");
-		URI dbUri = new URI(System.getenv("DATABASE_URL"));
-		
-		String username = dbUri.getUserInfo().split(":")[0];
-        String password = dbUri.getUserInfo().split(":")[1];
-        String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
-
-		
+	public DataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		dataSource.setDriverClassName("org.postgresql.Driver");
-		dataSource.setUrl(dbUrl);
-		dataSource.setUsername(username);
-		dataSource.setPassword(password);
+		dataSource.setDriverClassName(environment.getProperty("driver"));
+		dataSource.setUrl("jdbc:mysql://thuan1.mysql.database.azure.com:3306/cv?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");
+		dataSource.setUsername("thuan@thuan1");
+		dataSource.setPassword("Anhtran123");
 		return dataSource;
 	}
 	
+//	@Bean
+//	public DataSource dataSource() {
+//		DriverManagerDataSource dataSource = new DriverManagerDataSource();
+//		dataSource.setDriverClassName(environment.getProperty("driver"));
+//		dataSource.setUrl(environment.getProperty("url"));
+//		dataSource.setUsername(environment.getProperty("user"));
+//		dataSource.setPassword(environment.getProperty("password"));
+//		return dataSource;
+//	}
+	
 	@Bean
-	public LocalSessionFactoryBean localSessionFactoryBean() throws ClassNotFoundException, URISyntaxException {
+	public LocalSessionFactoryBean localSessionFactoryBean() {
 		LocalSessionFactoryBean bean = new LocalSessionFactoryBean();
 		bean.setDataSource(dataSource());
 		bean.setPackagesToScan("com.entity");
