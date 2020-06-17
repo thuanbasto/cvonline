@@ -67,7 +67,7 @@ public class SpringConfiguration extends WebMvcConfigurerAdapter{
 	public DataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName(environment.getProperty("driver"));
-		dataSource.setUrl("jdbc:mysql://thuan1.mysql.database.azure.com:3306/cv?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");
+		dataSource.setUrl("jdbc:mysql://thuan1.mysql.database.azure.com:3306/cv?useSSL=true&requireSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");
 		dataSource.setUsername("thuan@thuan1");
 		dataSource.setPassword("Anhtran123");
 		return dataSource;
